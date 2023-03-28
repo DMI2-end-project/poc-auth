@@ -1,5 +1,5 @@
 import {reactive} from "vue";
-import {io, Socket} from "socket.io-client";
+import {io} from "socket.io-client";
 
 export const state = reactive({
   connected: false,
@@ -15,15 +15,12 @@ export const socket = io("http://localhost:3000", {
 
 socket.on("connect", () => {
   state.connected = true;
-  socket.on('coucou', (arg) => {
-    console.log('arg in', arg)
-  })
-  socket.emit('coucou', {
-    message : "hello from server"
-  })
 });
 
 socket.on("disconnect", () => {
   state.connected = false;
 });
 
+socket.on("join", (arg)=>{
+  console.log(arg)
+})

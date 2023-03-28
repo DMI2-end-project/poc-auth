@@ -1,8 +1,12 @@
-<script setup lang="ts">
-import {socket, state} from "./socket";
+<script lang="ts">
+import {defineComponent} from "vue";
 
+export default defineComponent({
+  name: 'App',
+  props: {}
+});
 </script>
 
 <template>
-  <div>State : {{ state.connected }}</div>
+  <router-view></router-view>
 </template>

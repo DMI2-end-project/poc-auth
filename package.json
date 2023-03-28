@@ -2,7 +2,7 @@
   "name": "poc-socket-io",
   "private": true,
   "version": "0.0.0",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "dev": "vite --host ",
     "build": "vue-tsc && vite build",
@@ -13,7 +13,8 @@
     "express": "^4.18.2",
     "socket.io": "^4.6.1",
     "socket.io-client": "^4.6.1",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
