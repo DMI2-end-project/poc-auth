@@ -19,6 +19,8 @@ const login = async () => {
     );
 
     if (pb.authStore.isValid) {
+      console.log(pb.authStore.token);
+      console.log(pb.authStore.model.id);
       /*
       * TODO :
       *  - Stocker la connexion
