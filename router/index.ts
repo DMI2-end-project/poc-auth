@@ -8,18 +8,22 @@ const config: RouterOptions = {
   history: createWebHistory(),
   routes: [
     {
+      name: 'Home',
       path: '/',
       component: Home
     },
     {
+      name: 'Login',
       path: '/login',
       component: Login
     },
     {
+      name: 'Dashboard',
       path: '/dashboard',
       component: Dashboard
     },
     {
+      name: 'Game',
       path: '/game',
       component: Game
     }
