@@ -10,6 +10,7 @@ export const state = reactive({
 const URL = process.env.NODE_ENV === "production" ? undefined : "http://localhost:5173";
 
 export const socket = io("http://localhost:3000", {
+  autoConnect: false,
   rejectUnauthorized: false // WARN: please do not do this in production
 });
 

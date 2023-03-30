@@ -1,26 +1,44 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
-import {socket, state} from "../client";
+import {inject, ref} from "vue";
+import {useRouter} from "vue-router";
+import PocketBase from "pocketbase";
 
-onMounted(() => {
-  console.log('Home mounted')
-})
+const email = ref();
+const password = ref();
 
-const roomId = ref('');
+const pb: PocketBase | undefined = inject('pb');
+const router = useRouter();
 
-const joinRoom = () => {
-  console.log('roomId', roomId.value);
-  socket.emit('join', roomId.value);
+const login = async () => {
+  console.log('login', email.value, password.value);
+
+  if (pb) {
+    const authData = await pb.collection('person').authWithPassword(
+        email.value,
+        password.value,
+    );
+
+    if (pb.authStore.isValid) {
+      /*
+      * TODO :
+      *  - Stocker la connexion
+      *  - Push to '/'
+       */
+      await router.push('/dashboard')
+    }
+  }
 }
+
 </script>
 <template>
   <div>
-    <h1>Home</h1>
-    <div>State : {{ state.connected }}</div>
-    <form @submit.prevent="joinRoom">
-      <label for="roomId">Room id :</label>
-      <input type="text" name="roomId" v-model="roomId">
-      <button type="submit">Joindre la room</button>
+    <h1>Login</h1>
+    <form @submit.prevent="login">
+      <label for="email">Adresse email :</label>
+      <input type="email" name="email" v-model="email" autocomplete="email">
+      <label for="password">Mot de passe :</label>
+      <input type="password" name="password" v-model="password" autocomplete="password">
+      <button type="submit">Se connecter</button>
     </form>
   </div>
 </template>
